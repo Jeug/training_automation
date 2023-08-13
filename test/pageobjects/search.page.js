@@ -9,8 +9,8 @@ class SearchPage extends Page {
     return $("button.custom-button.transparent-yellow.float-right");
   }
   async addToCartMultipleProducts(count) {
-    for (let i = 0; i < count; i++) {
-      (await this.addToCartButtonSelectors[i]).click();
+    for (let i = 0; i <= count; i++) {
+      await this.addToCartButtonSelectors[i].click();
       await this.continueShoppingButtonSelector.click();
     }
   }
