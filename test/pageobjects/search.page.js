@@ -8,7 +8,7 @@ class SearchPage extends Page {
   get continueShoppingButtonSelector() {
     return $("button.custom-button.transparent-yellow.float-right");
   }
-  async clickMultipleProducts(count) {
+  async addToCartMultipleProducts(count) {
     for (let i = 0; i < count; i++) {
       (await this.addToCartButtonSelectors[i]).click();
       await this.continueShoppingButtonSelector.click();
