@@ -8,19 +8,30 @@ class SearchPage extends Page {
   get continueShoppingButtonSelector() {
     return $("button.custom-button.transparent-yellow.float-right");
   }
+  get openCartButtonSelector() {
+    return $(".warenkorb-menu");
+  }
+  async pickOptionsFromFilter(option) {
+    const filterOption = await $(`[for="${option}"]`);
+    await filterOption.waitForClickable();
+    await filterOption.click();
+    await expect(await $(`[id="${option}"]`)).toBeChecked();
+  }
+
   async addToCartMultipleProducts(count) {
     for (let i = 0; i <= count; i++) {
-      await this.addToCartButtonSelectors[i].click();
-      await this.continueShoppingButtonSelector.click();
+      await (await this.addToCartButtonSelectors[i]).click();
+      await (await this.continueShoppingButtonSelector).click();
     }
   }
 
   async clickProductByTitle(productTitle) {
+    await $(`[title="${productTitle}"]`).waitForClickable();
     await $(`[title="${productTitle}"]`).click();
   }
 
   async open() {
-    await super.open("suchergebnisse");
+    await super.open("suchergebnisse?query=17537");
   }
 }
 
